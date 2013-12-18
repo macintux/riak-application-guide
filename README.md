@@ -1,4 +1,4 @@
 riak-application-guide
 ======================
 
-Consolidate best practices around key/value storage
+Consolidate best practices around key/value storage.
