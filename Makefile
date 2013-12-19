@@ -1,4 +1,4 @@
-sources = front.md anti-patterns.md modeling.md conflicts.md dynamic.md back.md
+sources = front.md anti-patterns.md denormalization.md modeling.md conflicts.md dynamic.md back.md
 
 %.pdf :: %.md
 	pandoc $*.md -o $*.pdf
