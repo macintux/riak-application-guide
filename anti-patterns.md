@@ -146,3 +146,14 @@ It's a rather unusual idea for someone coming from a relational
 mindset, but being able to algorithmically determine the key that you
 need for the data you want to retrieve is a major part of the Riak
 application story.
+
+## Running a single server
+
+We're straying into operations anti-patterns, but this is a common
+misunderstanding of Riak's architecture.
+
+* File descriptors
+* Partitions
+* ARGH
+
+<!-- any other operational anti-patterns? -->
