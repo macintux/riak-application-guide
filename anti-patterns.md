@@ -20,7 +20,7 @@ Key/value operations seem very primitive (and they are) but you'll
 find they are flexible, scalable, and very very fast. Treat 2i and
 friends as tools to be applied carefully, but design your application
 as if they don't exist and your software will continue to work at
-blazing speeds when you have petabytes of data stored on dozens of
+blazing speeds when you have petabytes of data stored across dozens of
 servers.
 
 ## JSON all the things!
