@@ -44,7 +44,7 @@ scaling characteristics of Riak (by adding the possibility of data
 hotspots) and increasing the likelihood of data conflicts (two writers
 making changes to the same object at the same time).
 
-And, with an exception we'll discuss much later in [crdts], Riak has
+And, with an exception we'll discuss later in [Data types], Riak has
 no notion of partial updates to documents, so you can't reach in tweak
 an individual field in a JSON object.
 
@@ -67,7 +67,7 @@ each involving multiple requests, in a timely fashion.
 
 Instead, because adding significant amounts of disk storage to a Riak
 cluster is as simple as building a new server, we'll talk in
-[denormalization] about going the other direction and creating
+[Denormalization] about going the other direction and creating
 multiple copies of your data based on common queries.
 
 [^link-walking]: Basho has long offered a mechanism called *link
