@@ -15,23 +15,14 @@ here.
 ## Terminology
 
 Key
-
 :   Take a wild guess
-
 Bucket
-
 :   Virtual namespaces for keys
-
 Bucket types
-
 :   Will we need this?
-
 Immutability
-
 :   Seriously?
-
 Denormalization
-
 :   Now you're just getting silly
 
 ## Rules to live by
