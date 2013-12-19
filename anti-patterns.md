@@ -45,8 +45,9 @@ hotspots) and increasing the likelihood of data conflicts (two writers
 making changes to the same object at the same time).
 
 And, with an exception we'll discuss later in [Data types], Riak has
-no notion of partial updates to documents, so you can't reach in tweak
-an individual field in a JSON object.
+no notion of partial updates to documents, so you can't tweak an
+individual field in a JSON object without retrieving and uploading the
+full object.
 
 <!--  XXX: minimizing translation(??) overhead? There's a term I want -->
 <!--  here. Impedance mismatch? -->
