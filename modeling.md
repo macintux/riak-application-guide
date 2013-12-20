@@ -4,8 +4,11 @@
 It's hard to escape the relational mindset when designing an
 applications that rely on a database, but once you set that aside in
 favor of key/value modeling you discover interesting patterns that you
-can use outside of Riak, even in SQL
-databases.^[Feel free to use a relational database when you're willing to sacrifice the scalability, performance, and availability of Riak...but why would you?]
+can use outside of Riak, even in SQL databases.[^sql-databases]
+
+[^sql-databases]: Feel free to use a relational database when you're
+willing to sacrifice the scalability, performance, and availability of
+Riak...but why would you?
 
 If you thoroughly absorbed the earlier content, some of this may feel
 redundant, but not all of us are able to grasp the implications of the
@@ -14,16 +17,21 @@ here.
 
 ## Terminology
 
-Key
-:   Take a wild guess
 Bucket
 :   Virtual namespaces for keys
 Bucket types
-:   Will we need this?
-Immutability
-:   Seriously?
-Denormalization
-:   Now you're just getting silly
+:   Collections of buckets for customization or security
+Denormalize
+:   Introduce redundancy into a data set
+Immutable data
+:   Data which, once written, is never updated
+Key
+:   A string which uniquely (per bucket) identifies values in Riak
+Object
+:   Another term for **value**
+Value
+:   The data associated with a key
+
 
 ## Rules to live by
 
@@ -40,9 +48,9 @@ approaches.
 
     The best way to always know the key you want is to be able to
     programmatically reproduce it based on information you already
-    have. Need to know the sales data for one of your client's magazines
-    in December 2013? Store it in a *sales* bucket and name the key after
-    the client, magazine, and month/year combo.
+    have. Need to know the sales data for one of your client's
+    magazines in December 2013? Store it in a **sales** bucket and
+    name the key after the client, magazine, and month/year combo.
 
     Guess what? Retrieving it will be much faster than running a SQL
     `select` statement in a relational database.
@@ -74,20 +82,44 @@ approaches.
 
 (@small) Take small bites.
 
-    Your parents were right.
+    Remember your parents' advice over dinner? They were right.
 
     When creating objects *that will be updated later*, constrain their
-    scope and keep the number of distinct elements to a small number,
+    scope and keep the number of contained elements to a small number,
     ideally just 1. We'll talk more about why when we discuss conflict
     resolution.
 
 (@indexes) Create your own indexes.
 
+    Riak offers metadata-driven indexes for values, but these face
+    scaling challenges: in order to identify all objects for a given
+    index value, roughly $\frac{1}{3}$rd of the cluster must be contacted.
+
+    For many use cases, creating your own indexes is straightforward
+    and much faster/more scalable, since you'll be managing and
+    retrieving a single object.
+    
+    See [Conflict resolution] for more discussion of this.
+
 (@immutable) Embrace immutability.
 
-* segregate mutable from non-mutable data (ties back to small data objects)
-* much big data comes from events, and events are by definition immutable
-* datomic
+    As we discussed in [Mutability], immutable data offers a way out
+    of some of the challenges of running a high volume, high velocity
+    data store.
+
+    If possible, segregate mutable from non-mutable data, ideally
+    using different buckets for [request tuning][Request tuning].
+
+    Because keys are only unique within a bucket, the same unique
+    identifier can be used in different buckets to represent different
+    information about the same entity (e.g., a customer address might
+    be in an `address` bucket with the customer id as its key).
+
+    [Datomic](http://www.datomic.com) is a unique data storage system
+    that leverages immutability for all data, with Riak commonly used
+    as a backend data store. It treats any data item in its system as
+    a "fact," to be potentially superseded by later facts but never
+    updated.
 
 <!-- Think about a chapter break here -->
 ## ORM
