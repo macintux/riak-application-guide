@@ -7,6 +7,7 @@ months" content to one chapter that's not awful -->
 
 * Devrel
 * Short discussion of client libraries
+* Basho bench
 
 ## Riak Pipe/Core?
 
