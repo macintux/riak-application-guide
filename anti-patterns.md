@@ -124,6 +124,15 @@ Twitter is famous for making MySQL work in a heavily distributed, high
 traffic environment, and it does so in part by leveraging
 immutability.
 
+## Object-relational mapping
+
+Automatically translating software objects to relational tables and
+back has always been an awkward process, no matter how sophisticated
+the mapping tools.
+
+Now, there's no need to map: simply serialize the object and store it
+directly to Riak.
+
 ## SELECT * FROM &lt;table&gt;
 
 A perfectly natural response when first encountering a populated

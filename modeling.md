@@ -122,8 +122,6 @@ approaches.
     updated.
 
 <!-- Think about a chapter break here -->
-## ORM
-
 ## Conditional requests
 
 <!-- May be too deep in the weeds, but deserves at least a mention -->
