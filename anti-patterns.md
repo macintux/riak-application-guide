@@ -147,6 +147,19 @@ mindset, but being able to algorithmically determine the key that you
 need for the data you want to retrieve is a major part of the Riak
 application story.
 
+## Large number of customized buckets
+
+We'll talk more about buckets later in this document, but for the
+moment, be aware that they are dynamically-created namespaces for
+keys.
+
+One useful feature of buckets is the ability to tune future key
+requests for that bucket (again, more later).
+
+The important Riak development anti-pattern is this: buckets are free
+*unless* you start tuning them. They're still relatively cheap, but
+creating thousands of customized buckets can bring Riak to a crawl.
+
 ## Large objects
 
 Because Riak sends multiple copies of your data around the network for
