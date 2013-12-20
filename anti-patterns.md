@@ -147,17 +147,69 @@ mindset, but being able to algorithmically determine the key that you
 need for the data you want to retrieve is a major part of the Riak
 application story.
 
+## Large objects
+
+Because Riak sends multiple copies of your data around the network for
+every request, values that are too large can clog the pipes, so to
+speak, causing significant latency problems.
+
+Basho generally recommends 1-4MB objects as a soft cap; larger sizes
+are possible with careful tuning, however.
+
+We'll return to object size when discussing [Conflict resolution]; for
+the moment, suffice it to say that if you're planning on storing
+*mutable* objects in the upper ranges of our recommendations, you're
+particularly at risk of latency problems.
+
+For significantly larger objects,
+[Riak CS](http://basho.com/riak-cloud-storage/) offers an Amazon
+S3-compatible (and also OpenStack Swift-compatible) key/value object
+store that uses Riak under the hood.
+
 ## Running a single server
 
-We're straying into operations anti-patterns, but this is a common
-misunderstanding of Riak's architecture.
+At this point, we are straying into operations anti-patterns, but what
+follow are common misunderstandings of Riak's architecture.
 
-* File descriptors
-* Partitions
-* ARGH
+It is quite common to install Riak in a development environment using
+its `devrel` build target, which creates five Erlang virtual machines
+to run on one server.
 
+However, running it on a single server for benchmarking or production
+use, regardless of whether there's a single Erlang VM or five of them,
+is counterproductive.
 
-## Adding layers in front of Riak
+It is possible to argue that Riak is more of a database coordination
+platform than a database itself. It uses Bitcask or LevelDB to persist
+data to disk, but more importantly, it commonly uses *at least* 64
+such embedded databases in a cluster.
+
+Needless to say, if you run 64 databases simultaneously on a single
+filesystem you are risking significant I/O and CPU contention unless
+the environment is carefully tuned (and has some pretty fast disks).
+
+Perhaps more importantly, Riak's core design goal, its raison d'être,
+is high availability via data redundancy and related
+mechanisms. Writing three copies of any all your data to a single
+server is mostly pointless, both contributing to resource contention
+and throwing away Riak's ability to survive server failure.
+
+It is quite possible that, as Riak continues to build
+developer-friendly features atop its robust operational underpinnings,
+it will make sense to create a custom-tuned Riak environment for
+single-server environments. Today, however, if you only need a single
+server to run your database, there are far better databases to do
+so. (Those databases, however, don't have the scalability/robustness
+story that Riak does.)
+
+## Adding redundancy in front of Riak
+
+<!-- When confronted with the fact that a distributed, highly available
+data store faces consistency challenges, some will start thinking
+about placing a cache in front... -->
+
+<!-- I don't really know what I want to say here, or whether I want to
+include this section at all. I probably do. -->
 
 * Caching
 * MQ
