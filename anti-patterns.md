@@ -149,7 +149,7 @@ application story.
 
 ## Large number of customized buckets
 
-We'll talk more about buckets later in this document, but for the
+We'll talk more about buckets later in this guide, but for the
 moment, be aware that they are dynamically-created namespaces for
 keys.
 
