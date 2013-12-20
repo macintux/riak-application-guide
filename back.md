@@ -12,3 +12,7 @@ months" content to one chapter that's not awful -->
 ## Riak Pipe/Core?
 
 ## Resources
+
+* http://littleriakbook.com
+* http://docs.basho.com/riak/latest/dev/taste-of-riak/
+* http://docs.basho.com/riak/latest/community/faqs/developing/
