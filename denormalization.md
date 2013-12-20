@@ -25,7 +25,7 @@ Need more disk space? Add another server. Install your OS, install
 Riak, tell the cluster you want to join it, and then pull the
 trigger. Doesn't get much easier than that.
 
-## Performance (additive)
+## Performance over time
 
 If you've ever created a *really* large table in a relational
 database, you have probably discovered that your performance is
@@ -38,7 +38,7 @@ table, called a *bucket*, but buckets don't carry the indexing overhead of a rel
 Not growing at a constant rate, but quite literally
 constant. Flat. Fast. Cheap. Easy.
 
-## Performance (writes)
+## Performance per request
 
 Yes, writing the same piece of data multiple times is slower than
 writing it once, by definition.
@@ -50,7 +50,8 @@ is when you're trying to read your data so you can take action on it
 
 Unless your application is receiving many hundreds or thousands of new
 pieces of data per second to be stored, you should have plenty of time
-to write those entries individually, multiple times. If you really
+to write those entries individually, even if you write them multiple
+times to different keys to make future queries faster. If you really
 *are* receiving so many objects for storage that you don't have time
 to write them individually, you can buffer and write blocks of them in
 chunks.
@@ -60,10 +61,21 @@ larger collections for later retrieval regardless of the ingest rate.
 
 ## What about updates?
 
+One key advantage to normalization is that you only have to update any
+given piece of data once.
 
-This is a valid concern, but not nearly as big of a deal as you might
-suspect.
+As it turns out, updates to denormalized data are not nearly as big of
+a deal as you might suspect in Riak.
 
-First, many use cases that require large quantities of data deal with
-mostly immutable data. Log entries, sensor readings, media storage,
-XXX...
+Many use cases that require large quantities of storage deal with
+mostly immutable data, such as log entries, sensor readings, and media
+storage.
+
+Any information which must be updated frequently should be confined to
+small objects dedicated to the mutable information.
+
+<!-- Would be nice to have an example here -->
+
+We'll talk much more about data modeling to account for mutable and
+immutable data.
+
