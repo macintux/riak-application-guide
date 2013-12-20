@@ -156,4 +156,10 @@ misunderstanding of Riak's architecture.
 * Partitions
 * ARGH
 
+
+## Adding layers in front of Riak
+
+* Caching
+* MQ
+
 <!-- any other operational anti-patterns? -->

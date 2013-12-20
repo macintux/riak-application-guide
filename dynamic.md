@@ -4,6 +4,6 @@
 
 ## MapReduce
 
+* Perils of JS (prefer Erlang)
+
 ## Full-text search
-
-
