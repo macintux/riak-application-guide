@@ -16,3 +16,4 @@ months" content to one chapter that's not awful -->
 * http://littleriakbook.com
 * http://docs.basho.com/riak/latest/dev/taste-of-riak/
 * http://docs.basho.com/riak/latest/community/faqs/developing/
+* http://highlyscalable.wordpress.com/2012/03/01/nosql-data-modeling-techniques/

@@ -121,45 +121,19 @@ approaches.
     a "fact," to be potentially superseded by later facts but never
     updated.
 
-<!-- Think about a chapter break here -->
-## Conditional requests
+(@hybrid) Don't fear hybrid solutions.
 
-<!-- May be too deep in the weeds, but deserves at least a mention -->
+    As much we would all love to have a database that is an excellent
+    solution for any problem space, we're a long way from that goal.
 
-It is possible to use conditional requests with Riak, but these are
-fragile due to the nature of its availability/eventual consistency
-model.
+    In the meantime, it's a perfectly reasonable (and very common)
+    approach to mix and match databases for different needs. Riak is
+    very fast and scalable for retrieving keys, but it's decidedly
+    suboptimal at dynamic queries. If you can't model your way out of
+    that problem, don't be afraid to store your keys with searchable
+    metadata in a relational or other database that makes ad hoc
+    querying simple.
 
-<!-- XXX Can't find good docs, and the FAQ indicates that `If-None-Match` isn't
-supported in PB; still true? -->
-
-
-## Strong consistency
-
-As of Riak 2.0, it is possible to indicate that values should be
-managed using a consensus protocol, so a quorum of the servers
-responsible for that data must agree to a change before it is
-committed.
-
-This is a useful tool, but keep in mind the tradeoffs: writes will be
-slower due to the coordination overhead, and Riak's ability to
-continue to serve requests in the prence of network partitions and
-server failures will be compromised.
-
-For example, if a majority of the primary servers for the data are
-unavailable, Riak will refuse to answer read requests, because the
-surviving servers have no way of knowing whether the data they contain
-is accurate.
-
-Thus, use this only when necessary, such as when the cost for
-conflicting writes is too high. An example of the need for this comes
-from Riak CS: because users are allowed to create new accounts, and
-because there's no convenient way to resolve username conflicts if two
-accounts are created at the same time with the same name, it is
-important to coordinate such requests.
-
-<!-- YAY -->
-
-
-
-## Hybrid solutions
+    Just make sure that you consider failure scenarios when doing so;
+    it would be unfortunate to make Riak's effective availability a
+    slave to another database's weakness.
