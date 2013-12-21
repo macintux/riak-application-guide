@@ -93,12 +93,12 @@ approaches.
 
     Riak offers metadata-driven indexes for values, but these face
     scaling challenges: in order to identify all objects for a given
-    index value, roughly $\frac{1}{3}$rd of the cluster must be contacted.
+    index value, roughly a third of the cluster must be involved.
 
     For many use cases, creating your own indexes is straightforward
     and much faster/more scalable, since you'll be managing and
     retrieving a single object.
-    
+
     See [Conflict resolution] for more discussion of this.
 
 (@immutable) Embrace immutability.
