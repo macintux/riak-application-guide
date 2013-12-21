@@ -60,9 +60,22 @@ approaches.
     response, especially for immutable data, is among the fastest
     operations Riak offers.
 
+(@namespace) Know thy namespaces.
+
+    **Bucket types** (introduced in Riak 2.0) offer a way to secure
+    and configure buckets. Buckets offer namespaces and configurable
+    request parameters for keys. Both are good ways to segregate keys
+    for data modeling.
+
+    However, keys themselves define their own namespaces. If you want
+    a hierarchy for your keys that looks like `sales/customer/month`,
+    you don't need nested buckets: you just need to name your keys
+    appropriately, as discussed in (@keys). `sales` can be your
+    bucket, while each key is prepended with customer name and month.
+
 (@views) Write your own views.
 
-    The other name for this rule? *Know your queries.*
+    The other name for this rule? **Know your queries.**
 
     Dynamic queries in Riak are expensive. Writing is cheap. Disk space is
     cheap.

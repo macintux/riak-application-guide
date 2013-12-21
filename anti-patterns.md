@@ -165,9 +165,12 @@ keys.
 One useful feature of buckets is the ability to tune future key
 requests for that bucket (again, more later).
 
-The important Riak development anti-pattern is this: buckets are free
-*unless* you start tuning them. They're still relatively cheap, but
-creating thousands of customized buckets can bring Riak to a crawl.
+The caveat to remember is this: buckets are free *unless* you start
+tuning them. They're still relatively cheap, but creating thousands of
+customized buckets can bring Riak to a crawl.
+
+Bucket types with Riak 2.0 make it possible to define custom
+properties for large collections of buckets at little cost.
 
 ## Large objects
 
