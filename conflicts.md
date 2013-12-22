@@ -49,3 +49,23 @@ from Riak CS: because users are allowed to create new accounts, and
 because there's no convenient way to resolve username conflicts if two
 accounts are created at the same time with the same name, it is
 important to coordinate such requests.
+
+### Locks and constraints
+
+As we'll see in [Transactions], even without strong consistency it is
+possible to define ACID-like transactions in Riak at the application
+level.
+
+Two mechanisms which are **not** guaranteed to work without strong
+consistency are locks and *financial boundary* constraints. (WTF would
+these actually be called?)
+
+For financial operations, it may be necessary (or at least desirable)
+to prevent a balance from dropping below a certain value (e.g.,
+zero). This cannot be done with eventual consistency, because even
+with transactions it is always possible for a balance to be decreased
+on both sides of a network partition.
+
+Even with `PW=2` and conditional requests weird things can
+happen. Remember that `PW` requests can error out even when data is
+written durably.
