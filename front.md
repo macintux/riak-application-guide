@@ -42,18 +42,16 @@ it requires a different way of thinking about assembling and managing
 data.
 
 If you need to be convinced that Riak is the solution for you, this is
-not the guide you're looking for. LRB, Basho engineers, satisfied
-customers are better resources; my goal here is to help people who are
-already committed to (or seriously considering) Riak avoid many
+not the guide you're looking for. The Little Riak Book, Basho engineers, and satisfied
+customers are better resources; my goal here is to help people avoid common
 pitfalls that await the novice Riak developer. Designing applications
-to work well with a key/value data model is not (yet) a common skill.
+to work well with a distributed key/value store is not (yet) a common skill.
 
-Like any active software project, Riak is rapidly evolving to
-encompass new features and use cases. This guide will steer clear of
-low-level details that can be found in Basho's documentation website;
-rather, its goal is to capture the essence of what it means to develop
-applications against a distributed, eventually-consistent key/value
-database.
+Riak is rapidly evolving to encompass new features and use cases. This
+guide will steer clear of low-level details that can be found in
+Basho's documentation website; rather, its goal is to capture the
+essence of what it means to develop applications against a
+distributed, eventually-consistent key/value database.
 
 Furthermore, this neither an operations guide nor an architecture
 guide. Understanding how Riak works under the covers is useful, but it
