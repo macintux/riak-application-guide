@@ -5,10 +5,10 @@ that flexibility involves platform tuning accessible only via the host
 operating system, but several core behavioral values can (and should)
 be managed by applications.
 
-With the notable exception of `n_val` (commonly referred to as `N`),
-the parameters described below can be specified with each request. All
-of them can be configured per-bucket type (available with Riak 2.0) or
-per-bucket.
+With the notable exceptions of `n_val` (commonly referred to as `N`)
+and `allow_mult`, the parameters described below can be specified with
+each request. All of them can be configured per-bucket type (available
+with Riak 2.0) or per-bucket.
 
 ## Key concepts
 
@@ -54,6 +54,11 @@ before the client will be sent a response. Default: 2
 treated as a successful assertion that the value doesn't exist
 (`true`) or as an error that should not count toward the `r` or `pr`
 counts (`false`). Default: `true`
+`allow_mult`
+:   Does this bucket retain conflicts for the application to resolve
+(`true`) or pick a winner using vector clocks and server timestamp
+even if the causality history does not indicate that it is safe to do
+so (`false`). Default: `false` prior to Riak 2.0, `true` after
 
 ## Impact
 
