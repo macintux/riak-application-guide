@@ -97,6 +97,8 @@ contains siblings, move on to another data set
 
 Bucket: `allow_mult=true`
 
+### Sequence
+
 1. Worker reads with `pr=quorum` to determine whether a lock exists
 2. If it does, move on to another data set
 3. If it doesn't, create a lock with `pw=quorum` and a timestamp
