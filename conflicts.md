@@ -52,7 +52,7 @@ important to coordinate such requests.
 
 ### Locks and constraints
 
-As we'll see in [Transactions], even without strong consistency it is
+As we'll see in [Modeling transactions], even without strong consistency it is
 possible to define ACID-like transactions in Riak at the application
 level.
 
