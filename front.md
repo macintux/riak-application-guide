@@ -47,11 +47,9 @@ customers are better resources; my goal here is to help people avoid common
 pitfalls that await the novice Riak developer. Designing applications
 to work well with a distributed key/value store is not (yet) a common skill.
 
-Riak is rapidly evolving to encompass new features and use cases. This
-guide will steer clear of low-level details that can be found in
-Basho's documentation website; rather, its goal is to capture the
-essence of what it means to develop applications against a
-distributed, eventually-consistent key/value database.
+Because Riak is evolving rapidly to encompass new features and use cases, this
+guide will steer clear of low-level details that can be found on
+Basho's documentation website.
 
 Furthermore, this neither an operations guide nor an architecture
 guide. Understanding how Riak works under the covers is useful, but it
