@@ -79,3 +79,6 @@ small objects dedicated to the mutable information.
 We'll talk much more about data modeling to account for mutable and
 immutable data.
 
+## Further reading
+
+* [NoSQL Data Modeling Techniques](http://highlyscalable.wordpress.com/2012/03/01/nosql-data-modeling-techniques/) (Highly Scalable Blog)
