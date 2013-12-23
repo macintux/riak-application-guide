@@ -90,8 +90,8 @@ contains siblings, move on to another data set
 3. Worker #2 writes its ID to the lock
 5. Worker #1 writes its ID to the lock
 6. Worker #1 reads the lock and sees a conflict
-4. Worker #2 reads the lock and sees a conflict
-7. Both workers move on to another data set
+7. Worker #2 reads the lock and sees a conflict
+8. Both workers move on to another data set
 
 ## Lock, a fourth draft
 
@@ -117,9 +117,9 @@ to another data set
 3. Worker #2 writes its ID and timestamp to the lock
 4. Worker #2 reads the lock and sees its ID
 5. Worker #2 starts processing the data set
-5. Worker #1 writes its ID and timestamp to the lock
-6. Worker #1 reads the lock and sees its ID with the lowest timestamp
-7. Worker #1 starts processing the data set
+6. Worker #1 writes its ID and timestamp to the lock
+7. Worker #1 reads the lock and sees its ID with the lowest timestamp
+8. Worker #1 starts processing the data set
 
 At this point I may hear you grumbling: clearly worker #2 would have
 the lower timestamp because it attempted its write first, and thus #1
