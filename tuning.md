@@ -69,8 +69,8 @@ servers will be available to respond.
 ***Please read this. Very important. Really.***
 
 The semantics for write failure are *very different* under eventually
-consistent Riak than they are with strongly consistent writes enabled
-in Riak 2.0, so I'll tackle each separately.
+consistent Riak than they are with the optional strongly consistent
+writes available in Riak 2.0, so I'll tackle each separately.
 
 ### Eventual consistency
 
