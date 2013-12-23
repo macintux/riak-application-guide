@@ -94,3 +94,8 @@ first server that responds doesn't have a copy of your data you'll get
 a `not found` response; if a failover server happens to be actively
 serving requests, there's a very good chance it'll be the first to
 respond since it won't yet have a copy of that key.
+
+## Further reading
+
+* [Eventual Consistency](http://docs.basho.com/riak/latest/theory/concepts/Eventual-Consistency/) (docs.basho.com)
+* [Understanding Riak's Configurable Behaviors](http://basho.com/understanding-riaks-configurable-behaviors-part-1/) (Basho blog series)
