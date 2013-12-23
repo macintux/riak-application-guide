@@ -97,5 +97,7 @@ respond since it won't yet have a copy of that key.
 
 ## Further reading
 
+* [Buckets](http://docs.basho.com/riak/latest/theory/concepts/Buckets/) (docs.basho.com)
 * [Eventual Consistency](http://docs.basho.com/riak/latest/theory/concepts/Eventual-Consistency/) (docs.basho.com)
+* [Replication](http://docs.basho.com/riak/latest/theory/concepts/Replication/) (docs.basho.com)
 * [Understanding Riak's Configurable Behaviors](http://basho.com/understanding-riaks-configurable-behaviors-part-1/) (Basho blog series)
