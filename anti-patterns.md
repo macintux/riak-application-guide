@@ -105,6 +105,8 @@ is a **terrible** conflict resolution method.
 Even if your server clocks are magically always in sync, are your
 business needs well-served by blindly applying the most recent update?
 
+[Conflict resolution] covers this in much more detail.
+
 ## Mutability
 
 For years, functional programmers have been singing the praises of
@@ -162,11 +164,11 @@ We'll talk more about buckets later in this guide, but for the
 moment, be aware that they are dynamically-created namespaces for
 keys.
 
-One useful feature of buckets is the ability to tune future key
+One useful feature of buckets is the ability to tune read and write
 requests for that bucket (again, more later).
 
-The caveat to remember is this: buckets are free *unless* you start
-tuning them. They're still relatively cheap, but creating thousands of
+The caveat is this: buckets are free *unless* you start tuning
+them. They're still relatively cheap, but creating thousands of
 customized buckets can bring Riak to a crawl.
 
 Bucket types with Riak 2.0 make it possible to define custom
@@ -215,7 +217,7 @@ the environment is carefully tuned (and has some pretty fast disks).
 
 Perhaps more importantly, Riak's core design goal, its raison d'être,
 is high availability via data redundancy and related
-mechanisms. Writing three copies of any all your data to a single
+mechanisms. Writing three copies of all your data to a single
 server is mostly pointless, both contributing to resource contention
 and throwing away Riak's ability to survive server failure.
 
