@@ -60,6 +60,11 @@ approaches.
     response, especially for immutable data, is among the fastest
     operations Riak offers.
 
+    Because keys are only unique within a bucket, the same unique
+    identifier can be used in different buckets to represent different
+    information about the same entity (e.g., a customer address might
+    be in an `address` bucket with the customer id as its key).
+
 (@namespace) Know thy namespaces.
 
     **Bucket types** (introduced in Riak 2.0) offer a way to secure
@@ -122,11 +127,6 @@ approaches.
 
     If possible, segregate mutable from non-mutable data, ideally
     using different buckets for [request tuning][Request tuning].
-
-    Because keys are only unique within a bucket, the same unique
-    identifier can be used in different buckets to represent different
-    information about the same entity (e.g., a customer address might
-    be in an `address` bucket with the customer id as its key).
 
     [Datomic](http://www.datomic.com) is a unique data storage system
     that leverages immutability for all data, with Riak commonly used
