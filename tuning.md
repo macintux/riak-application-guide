@@ -58,7 +58,8 @@ counts (`false`). Default: `true`
 :   Does this bucket retain conflicts for the application to resolve
 (`true`) or pick a winner using vector clocks and server timestamp
 even if the causality history does not indicate that it is safe to do
-so (`false`). Default: `false` prior to Riak 2.0, `true` after
+so (`false`). See [Conflict resolution] for more. Default: `false`
+prior to Riak 2.0, `true` after
 
 ## Impact
 
@@ -76,3 +77,20 @@ the client receives an error message. A timeout in that case, or any
 sort of error/timeout *without* strong consistency, can conceal a
 successful write, because Riak is designed to preserve your writes as
 much as is possible.
+
+## Tuning for immutable data
+
+If you constrain a bucket to contain nothing but immutable data, you
+can tune for very fast responses to read requests by setting `r=1` and
+`notfound_ok=false`.
+
+This means that read requests will (as always) be sent to all `n_val`
+servers, but the first server that responds with **a value other than
+`notfound`** will be considered "good enough" for a response to the
+client.
+
+Ordinarily with `r=1` and the default value `notfound_ok=true` if the
+first server that responds doesn't have a copy of your data you'll get
+a `not found` response; if a failover server happens to be actively
+serving requests, there's a very good chance it'll be the first to
+respond since it won't yet have a copy of that key.
