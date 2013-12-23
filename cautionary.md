@@ -148,6 +148,12 @@ comparison purposes, the ID of each worker was used for comparison
 purposes. All it takes is for one worker to read its own write before
 another worker's write request arrives.
 
+## Conclusion
+
+We can certainly come up with algorithms that limit the number of
+times that multiple workers tackle the same job, but I have yet to
+find one that guarantees exclusion.
+
 What I found surprising about this exercise is that none of the
 failure scenarios required some of the odder edge conditions that can
 cause unexpected outcomes. For example, `pw=quorum` writes will return
