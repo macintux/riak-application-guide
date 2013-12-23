@@ -195,16 +195,16 @@ store that uses Riak under the hood.
 
 ## Running a single server
 
-At this point, we are straying into operations anti-patterns, but what
-follow are common misunderstandings of Riak's architecture.
+This is more of an operations anti-pattern, but it is a common
+misunderstanding of Riak's architecture.
 
 It is quite common to install Riak in a development environment using
-its `devrel` build target, which creates five Erlang virtual machines
-to run on one server.
+its `devrel` build target, which creates 5 full Riak stacks (including
+Erlang virtual machines) to run on one server to simulate a cluster.
 
-However, running it on a single server for benchmarking or production
-use, regardless of whether there's a single Erlang VM or five of them,
-is counterproductive.
+However, running Riak on a single server for benchmarking or
+production use is counterproductive, regardless of whether you have 1
+stack or 5 on the box.
 
 It is possible to argue that Riak is more of a database coordination
 platform than a database itself. It uses Bitcask or LevelDB to persist
@@ -228,20 +228,6 @@ single-server environments. Today, however, if you only need a single
 server to run your database, there are far better databases to do
 so. (Those databases, however, don't have the scalability/robustness
 story that Riak does.)
-
-## Adding redundancy in front of Riak
-
-<!-- When confronted with the fact that a distributed, highly available
-data store faces consistency challenges, some will start thinking
-about placing a cache in front... -->
-
-<!-- I don't really know what I want to say here, or whether I want to
-include this section at all. I probably do. -->
-
-* Caching
-* MQ
-
-<!-- any other operational anti-patterns? -->
 
 ## Further reading
 
