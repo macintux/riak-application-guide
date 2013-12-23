@@ -102,10 +102,10 @@ approaches.
 
     Remember your parents' advice over dinner? They were right.
 
-    When creating objects *that will be updated later*, constrain their
-    scope and keep the number of contained elements to a small number,
-    ideally just 1. We'll talk more about why when we discuss conflict
-    resolution.
+    When creating objects *that will be updated later*, constrain
+    their scope and keep the number of contained elements low to
+    reduce the odds of multiple clients attempting to update the data
+    concurrently.
 
 (@indexes) Create your own indexes.
 
