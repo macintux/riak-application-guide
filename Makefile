@@ -10,3 +10,9 @@ guide.% :: $(sources)
 
 guide.epub :: $(sources)
 	pandoc --chapters $(sources) -o guide.epub
+
+book.pdf :: $(sources)
+	pandoc --chapters --toc $(sources) -o book.pdf
+
+book.tex :: $(sources)
+	pandoc --chapters --toc $(sources) -o book.tex
