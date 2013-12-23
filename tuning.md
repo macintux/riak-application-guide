@@ -31,35 +31,28 @@ retrieved from the current leader for that key/value pair.
 ## Tuning parameters
 
 `n_val`
-:   The number of copies of data that are written. This is independent
-of the number of servers in the cluster. Default: 3.
+:   The number of copies of data that are written. This is independent of the number of servers in the cluster. Default: **3**.
+
 `r`
-:   The number of servers that must *successfully* respond to a read
-request before the client will be sent a response. Default: `quorum`
+:   The number of servers that must *successfully* respond to a read request before the client will be sent a response. Default: **`quorum`**
+
 `w`
-:   The number of servers that must *successfully* respond to a write
-request before the client will be sent a response. Default: `quorum`
+:   The number of servers that must *successfully* respond to a write request before the client will be sent a response. Default: **`quorum`**
+
 `pr`
-:   The number of *primary* servers that must successfully respond to a read
-request before the client will be sent a response. Default: 0
+:    The number of *primary* servers that must successfully respond to a read request before the client will be sent a response. Default: **0**
+
 `pw`
-:   The number of *primary* servers that must successfully respond to a write
-request before the client will be sent a response. Default: 0
+:    The number of *primary* servers that must successfully respond to a write request before the client will be sent a response. Default: **0**
+
 `dw`
-:   The number of servers that must respond indicating that the value
-has been successfully handed off to the *backend* for durable storage
-before the client will be sent a response. Default: 2
+:    The number of servers that must respond indicating that the value has been successfully handed off to the *backend* for durable storage before the client will be sent a response. Default: **2**
+
 `notfound_ok`
-:   Specifies whether the absence of a value on a server should be
-treated as a successful assertion that the value doesn't exist
-(`true`) or as an error that should not count toward the `r` or `pr`
-counts (`false`). Default: `true`
+:    Specifies whether the absence of a value on a server should be treated as a successful assertion that the value doesn't exist (`true`) or as an error that should not count toward the `r` or `pr` counts (`false`). Default: **`true`**
+
 `allow_mult`
-:   Does this bucket retain conflicts for the application to resolve
-(`true`) or pick a winner using vector clocks and server timestamp
-even if the causality history does not indicate that it is safe to do
-so (`false`). See [Conflict resolution] for more. Default: `false`
-prior to Riak 2.0, `true` after
+:    Does this bucket retain conflicts for the application to resolve (`true`) or pick a winner using vector clocks and server timestamp even if the causality history does not indicate that it is safe to do so (`false`). See [Conflict resolution] for more. Default: **`false`** prior to Riak 2.0, **`true`** after
 
 ## Impact
 
@@ -71,12 +64,40 @@ Higher values can also increase the odds of a timeout failure or, in
 the case of the primary requests, the odds that insufficient primary
 servers will be available to respond.
 
-However, the only situation in which it is safe to assume that a write
-actually failed is with strong consistency in Riak 2.0 turned on when
-the client receives an error message. A timeout in that case, or any
-sort of error/timeout *without* strong consistency, can conceal a
-successful write, because Riak is designed to preserve your writes as
-much as is possible.
+## Write failures
+
+***Please read this. Very important. Really.***
+
+The semantics for write failure are *very different* under eventually
+consistent Riak than they are with strongly consistent writes enabled
+in Riak 2.0, so I'll tackle each separately.
+
+### Eventual consistency
+
+In most cases when the client receives an error message on a write
+request, *the write was not a complete failure*. Riak is designed to
+preserve your writes whenever possible, even if the parameters for a
+request are not met. **Riak will not roll back writes.**
+
+Even if you attempt to read the value you just tried to write and
+don't find it, that is not definitive proof that the write was a
+complete failure. (Sorry.)
+
+If the write is present on at least one server, *and* that server
+doesn't crash and burn, *and* other writes don't supersede it later,
+the key and value written should make their way to all servers
+responsible for them.
+
+### Strong consistency
+
+Strong consistency is the polar opposite from the default Riak
+behaviors. If a client receives an error when attempting to write a
+value, it is a safe bet that the value is not stashed somewhere in the
+cluster waiting to be propagated, **unless** the error is a timeout.
+
+No matter what response you receive, if you read the key and get the
+new value back, you can be confident that all future successful reads
+(until the next write) will return that same value.
 
 ## Tuning for immutable data
 
