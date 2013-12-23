@@ -240,3 +240,7 @@ include this section at all. I probably do. -->
 * MQ
 
 <!-- any other operational anti-patterns? -->
+
+## Further reading
+
+* [Why Riak](http://docs.basho.com/riak/latest/theory/why-riak/) (docs.basho.com)

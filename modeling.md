@@ -150,3 +150,7 @@ approaches.
     Just make sure that you consider failure scenarios when doing so;
     it would be unfortunate to make Riak's effective availability a
     slave to another database's weakness.
+
+## Further reading
+
+* [Use Cases](http://docs.basho.com/riak/latest/dev/data-modeling/) (docs.basho.com)
