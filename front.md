@@ -54,3 +54,22 @@ Basho's documentation website.
 Furthermore, this neither an operations guide nor an architecture
 guide. Understanding how Riak works under the covers is useful, but it
 should not be necessary for software development.
+
+## What do I need to read?
+
+While I'd hope that everyone will read this whole document, I have
+enough partially-read books on my shelves (analog and digital) to know
+better.
+
+Above all, read [How not to write a Riak application]. If the
+anti-patterns make sense, feel free to skip [Denormalization] and jump
+directly to [Data modeling].
+
+If [Data modeling] and the preceding content makes sense, the the
+guide has achieved its primary purpose of encouraging a different
+mindset when thinking about how Riak applications should be designed.
+
+Past that point, the guide jumps into more practical content for
+developing an application, and you can jump around as well, but be
+sure to read [Write failures] under [Request tuning], because Riak
+errors and write failures are two very different things.
