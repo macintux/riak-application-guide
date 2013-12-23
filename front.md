@@ -69,7 +69,12 @@ If [Data modeling] and the preceding content makes sense, the the
 guide has achieved its primary purpose of encouraging a different
 mindset when thinking about how Riak applications should be designed.
 
-Past that point, the guide jumps into more practical content for
-developing an application, and you can jump around as well, but be
-sure to read [Write failures] under [Request tuning], because Riak
-errors and write failures are two very different things.
+Be sure to read [Write failures] (under [Request tuning]), because
+Riak errors and write failures are two very different things.
+
+The other particularly critical content is under
+[Conflict resolution], because while it is possible to develop
+applications that ignore the problem, such applications are probably
+working correctly only when everything else in the environment is
+working correctly.
+
