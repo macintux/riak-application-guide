@@ -9,8 +9,7 @@ and it spurred me to finally learn a functional programming language.
 
 I grabbed a copy of
 [Bruce Tate's *Seven Languages in Seven Weeks*](http://pragprog.com/book/btlang/seven-languages-in-seven-weeks). With my background in server and network administration, and a bit of server-side software
-development experience, the first language that really piqued my
-interest was Erlang.
+development experience, Erlang grabbed me and has yet to let go.
 
 Learning Erlang led me to discover Basho and NoSQL technologies, and
 ultimately a job as technical evangelist for Basho, where I helped
