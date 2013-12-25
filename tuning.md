@@ -30,9 +30,24 @@ retrieved from the current leader for that key/value pair.
 
 ## Tuning parameters
 
+### Leave this alone
+
 `n_val`
 :   The number of copies of data that are written. This is independent of the number of servers in the cluster. Default: **3**.
 
+The `n_val` is vital to nearly everything that Riak does. The default
+value of 3 should never be lowered except in special circumstances,
+and changing it after a bucket has data can lead to unexpected
+behavior.
+
+### Configure at the bucket
+
+`allow_mult`
+:    Specify whether this bucket retains conflicts for the application to resolve (`true`) or pick a winner using vector clocks and server timestamp even if the causality history does not indicate that it is safe to do so (`false`). See [Conflict resolution] for more. Default: **`false`** prior to Riak 2.0, **`true`** after
+
+You **should** give this value careful thought. You **must** know what it will be to do proper key/value data modeling.
+
+### Configure at the bucket or per-request
 `r`
 :   The number of servers that must *successfully* respond to a read request before the client will be sent a response. Default: **`quorum`**
 
@@ -51,8 +66,6 @@ retrieved from the current leader for that key/value pair.
 `notfound_ok`
 :    Specifies whether the absence of a value on a server should be treated as a successful assertion that the value doesn't exist (`true`) or as an error that should not count toward the `r` or `pr` counts (`false`). Default: **`true`**
 
-`allow_mult`
-:    Does this bucket retain conflicts for the application to resolve (`true`) or pick a winner using vector clocks and server timestamp even if the causality history does not indicate that it is safe to do so (`false`). See [Conflict resolution] for more. Default: **`false`** prior to Riak 2.0, **`true`** after
 
 ## Impact
 
