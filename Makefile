@@ -8,6 +8,11 @@ sources = front.md anti-patterns.md denormalization.md modeling.md \
 guide.% :: $(sources)
 	pandoc --toc $(sources) -o guide.$*
 
+guide.html :: $(sources) htmlhead.html htmltail.html
+	pandoc --toc $(sources) -o tmp.html
+	cat htmlhead.html tmp.html htmltail.html > guide.html
+	rm tmp.html
+
 guide.epub :: $(sources)
 	pandoc --chapters $(sources) -o guide.epub
 
