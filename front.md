@@ -65,7 +65,7 @@ Above all, read [How not to write a Riak application]. If the
 anti-patterns make sense, feel free to skip [Denormalization] and jump
 directly to [Data modeling].
 
-If [Data modeling] and the preceding content makes sense, the the
+If [Data modeling] and the preceding content makes sense, then the
 guide has achieved its primary purpose of encouraging a different
 mindset when thinking about how Riak applications should be designed.
 
