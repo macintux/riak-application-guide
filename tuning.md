@@ -6,9 +6,9 @@ operating system, but several core behavioral values can (and should)
 be managed by applications.
 
 With the notable exceptions of `n_val` (commonly referred to as `N`)
-and `allow_mult`, the parameters described below can be specified with
-each request. All of them can be configured per-bucket type (available
-with Riak 2.0) or per-bucket.
+and `allow_mult`, the parameters described below can be overridden
+with each request. All of them can be configured per-bucket type
+(available with Riak 2.0) or per-bucket.
 
 ## Key concepts
 
