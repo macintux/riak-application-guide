@@ -2,22 +2,19 @@ sources = front.md anti-patterns.md denormalization.md modeling.md \
           conflicts.md transactions.md tuning.md cautionary.md \
           backends.md dynamic.md back.md
 
+## Make individual chapter for review
 %.pdf :: %.md
 	pandoc $*.md -o $*.pdf
 
+## Make any format not otherwise defined
 guide.% :: $(sources)
-	pandoc --toc $(sources) -o guide.$*
+	pandoc -s --toc $(sources) -o guide.$*
 
-guide.html :: $(sources) htmlhead.html htmltail.html
-	pandoc --toc $(sources) -o tmp.html
-	cat htmlhead.html tmp.html htmltail.html > guide.html
-	rm tmp.html
-
+## Make the epub (use --chapters)
 guide.epub :: $(sources)
-	pandoc --chapters $(sources) -o guide.epub
+	pandoc -s --chapters $(sources) -o guide.epub
 
+## Not sold yet on --chapters for PDF format, so use book.pdf
+## when desired, guide.pdf when not
 book.pdf :: $(sources)
-	pandoc --chapters --toc $(sources) -o book.pdf
-
-book.tex :: $(sources)
-	pandoc --chapters --toc $(sources) -o book.tex
+	pandoc -s --chapters --toc $(sources) -o book.pdf
