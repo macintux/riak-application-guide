@@ -142,7 +142,7 @@ approaches.
     In the meantime, it's a perfectly reasonable (and very common)
     approach to mix and match databases for different needs. Riak is
     very fast and scalable for retrieving keys, but it's decidedly
-    suboptimal at dynamic queries. If you can't model your way out of
+    suboptimal at ad hoc queries. If you can't model your way out of
     that problem, don't be afraid to store your keys with searchable
     metadata in a relational or other database that makes ad hoc
     querying simple.
