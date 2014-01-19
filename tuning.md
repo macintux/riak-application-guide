@@ -73,7 +73,7 @@ storage without bothering to compare against existing values. Default:
 :    Specifies whether the absence of a value on a server should be treated as a successful assertion that the value doesn't exist (`true`) or as an error that should not count toward the `r` or `pr` counts (`false`). Default: **`true`**
 
 
-## Impact
+### Impact
 
 Generally speaking, the higher the integer values listed above, the
 more latency will be involved, as the server that received the request
@@ -99,24 +99,33 @@ preserve your writes whenever possible, even if the parameters for a
 request are not met. **Riak will not roll back writes.**
 
 Even if you attempt to read the value you just tried to write and
-don't find it, that is not definitive proof that the write was a
+don't find it, that is **not** definitive proof that the write was a
 complete failure. (Sorry.)
 
 If the write is present on at least one server, *and* that server
-doesn't crash and burn, *and* other writes don't supersede it later,
+doesn't crash and burn, *and* future updates don't supersede it,
 the key and value written should make their way to all servers
 responsible for them.
+
+Retrying any updates that resulted in an error, with the appropriate
+vector clock to help Riak intelligently resolve conflicts, won't cause
+problems.
 
 ### Strong consistency
 
 Strong consistency is the polar opposite from the default Riak
 behaviors. If a client receives an error when attempting to write a
 value, it is a safe bet that the value is not stashed somewhere in the
-cluster waiting to be propagated, **unless** the error is a timeout.
+cluster waiting to be propagated, **unless** the error is a timeout,
+the least useful of all possible responses.
 
 No matter what response you receive, if you read the key and get the
-new value back, you can be confident that all future successful reads
-(until the next write) will return that same value.
+new value back[^client-libs], you can be confident that all future
+successful reads (until the next write) will return that same value.
+
+[^client-libs]: To be *absolutely certain* your value is in Riak, make
+certain to issue a new read request; your client library could always
+be caching the value you just wrote.
 
 ## Tuning for immutable data
 
