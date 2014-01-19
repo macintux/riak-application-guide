@@ -12,7 +12,7 @@ I grabbed a copy of
 development experience, Erlang grabbed me and has yet to let go.
 
 Learning Erlang led me to discover Basho and NoSQL technologies, and
-ultimately a job as technical evangelist for Basho, where I helped
+ultimately to a job as technical evangelist for Basho, where I helped
 edit
 [Eric Redmond's *A Little Riak Book*](http://littleriakbook.com/). Helping
 write Riak's documentation and interacting with developers has led me

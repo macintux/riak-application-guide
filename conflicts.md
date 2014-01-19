@@ -59,7 +59,9 @@ siblings by default (see [Tuning parameters] for the parameter
 retaining siblings for the application to resolve, although this will
 not impact legacy Riak applications running on upgraded clusters.
 
-Sometimes, letting Riak pick a winner is perfectly fine, but always ask yourself whether 
+For some use cases, letting Riak pick a winner is perfectly fine, but
+make sure you're monitoring your system clocks and are comfortable
+losing occasional (or not so occasional) updates.
 
 ### Data types
 
