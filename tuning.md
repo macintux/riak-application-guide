@@ -45,13 +45,10 @@ behavior.
 `allow_mult`
 :    Specify whether this bucket retains conflicts for the application to resolve (`true`) or pick a winner using vector clocks and server timestamp even if the causality history does not indicate that it is safe to do so (`false`). See [Conflict resolution] for more. Default: **`false`** prior to Riak 2.0, **`true`** after
 
-You **should** give this value careful thought. You **must** know what it will be to do proper key/value data modeling.
+    You **should** give this value careful thought. You **must** know what it will be in your environment to do proper key/value data modeling.
 
 `last_write_wins`
-:    Setting this to `true` is a slightly stronger version of
-`allow_mult=false`: when possible, Riak will write new values to
-storage without bothering to compare against existing values. Default:
-**`false`**
+:    Setting this to `true` is a slightly stronger version of `allow_mult=false`: when possible, Riak will write new values to storage without bothering to compare against existing values. Default: **`false`**
 
 ### Configure at the bucket or per-request
 `r`

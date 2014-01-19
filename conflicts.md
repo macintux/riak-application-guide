@@ -107,7 +107,7 @@ It is possible to use conditional requests with Riak, but these are
 fragile due to the nature of its availability/eventual consistency
 model.
 
-...
+**Need content here.**
 
 ## Locks and constraints
 
