@@ -67,7 +67,7 @@ storage without bothering to compare against existing values. Default:
 :    The number of *primary* servers that must successfully respond to a write request before the client will be sent a response. Default: **0**
 
 `dw`
-:    The number of servers that must respond indicating that the value has been successfully handed off to the *backend* for durable storage before the client will be sent a response. Default: **2**
+:    The number of servers that must respond indicating that the value has been successfully handed off to the *backend* for durable storage before the client will be sent a response. Default: **2** (effective minimum **1**)
 
 `notfound_ok`
 :    Specifies whether the absence of a value on a server should be treated as a successful assertion that the value doesn't exist (`true`) or as an error that should not count toward the `r` or `pr` counts (`false`). Default: **`true`**
