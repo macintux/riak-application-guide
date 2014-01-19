@@ -128,6 +128,19 @@ Even with `PW=2` and conditional requests weird things can
 happen. Remember that `PW` requests can error out even when data is
 written durably.
 
+## Conflicting resolution
+
+Resolving conflicts when data is being rapidly updated can feel
+Sysiphean.
+
+It's always possible that two different clients will attempt to
+resolve the same conflict at the same time, or that another client
+will update a value between the time that one client retrieves
+siblings and it attempts to resolve them. In either case you may have
+new conflicts created by conducting conflict resolution.
+
+Consider this yet another plug to consider immutability.
+
 ## Further reading
 
 * [Clocks Are Bad, Or, Welcome to the Wonderful World of Distributed Systems](http://basho.com/clocks-are-bad-or-welcome-to-distributed-systems/) (Basho blog)
