@@ -47,6 +47,12 @@ behavior.
 
 You **should** give this value careful thought. You **must** know what it will be to do proper key/value data modeling.
 
+`last_write_wins`
+:    Setting this to `true` is a slightly stronger version of
+`allow_mult=false`: when possible, Riak will write new values to
+storage without bothering to compare against existing values. Default:
+**`false`**
+
 ### Configure at the bucket or per-request
 `r`
 :   The number of servers that must *successfully* respond to a read request before the client will be sent a response. Default: **`quorum`**

@@ -22,9 +22,9 @@ its context (aka **vector clock**).
 
 With eventual consistency, if the vector clock cannot determine a
 causal relationship between two copies of an object, Riak will create
-siblings. Effectively, an object in Riak is no longer a simple opaque
-data blob, but is now two distinct blobs (siblings) waiting to be
-resolved.
+**siblings**. Effectively, such an object is no longer a simple opaque
+data blob, but rather two (or more) distinct blobs (siblings) waiting
+to be resolved.
 
 ## Conflict resolution strategies
 
@@ -116,8 +116,7 @@ possible to define ACID-like transactions in Riak at the application
 level.
 
 Two mechanisms which are **not** guaranteed to work without strong
-consistency are locks and *financial boundary* constraints. (WTF would
-these actually be called?)
+consistency are locks and constraints on values.
 
 For financial operations, it may be necessary (or at least desirable)
 to prevent a balance from dropping below a certain value (e.g.,
