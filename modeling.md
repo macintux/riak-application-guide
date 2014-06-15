@@ -142,8 +142,8 @@ approaches.
     very fast and scalable for retrieving keys, but it's decidedly
     suboptimal at ad hoc queries. If you can't model your way out of
     that problem, don't be afraid to store your keys with searchable
-    metadata in a relational or other database that makes ad hoc
-    querying simple.
+    metadata in a relational or other database that makes querying
+    simpler.
 
     Just make sure that you consider failure scenarios when doing so;
     it would be unfortunate to make Riak's effective availability a
