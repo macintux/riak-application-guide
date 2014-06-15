@@ -33,20 +33,21 @@ abysmal. Yes, indexes help with searching large tables, but
 maintaining those indexes are **expensive** at large data sizes.
 
 Riak includes a data organization structure vaguely similar to a
-table, called a *bucket*, but buckets don't carry the indexing overhead of a relational table. As you dump more and more data into a bucket, write (and read) performance is constant.
-
-Not growing at a constant rate, but quite literally
-constant. Flat. Fast. Cheap. Easy.
+table, called a *bucket*, but buckets don't carry the indexing
+overhead of a relational table. As you dump more and more data into a
+bucket, write (and read) performance is constant.
 
 ## Performance per request
 
 Yes, writing the same piece of data multiple times is slower than
 writing it once, by definition.
 
-However, for many Riak use cases, writes are asynchronous, happening
-all the time in the background. Where performance is really a concern
-is when you're trying to read your data so you can take action on it
-(or display it–we all know how impatient your users can be)
+However, for many Riak use cases, writes can be asynchronous. No one
+is (or should be) sitting at a web browser waiting for a sequence of
+write requests to succeed.
+
+What users care about is **read** performance. How quickly can you
+extract the data that you want?
 
 Unless your application is receiving many hundreds or thousands of new
 pieces of data per second to be stored, you should have plenty of time
@@ -57,22 +58,21 @@ to write them individually, you can buffer and write blocks of them in
 chunks.
 
 In fact, a common data pattern is to assemble multiple objects into
-larger collections for later retrieval regardless of the ingest rate.
+larger collections for later retrieval, regardless of the ingest rate.
 
 ## What about updates?
 
 One key advantage to normalization is that you only have to update any
 given piece of data once.
 
-As it turns out, updates to denormalized data are not nearly as big of
-a deal as you might suspect in Riak.
-
-Many use cases that require large quantities of storage deal with
-mostly immutable data, such as log entries, sensor readings, and media
-storage.
+However, many use cases that require large quantities of storage deal
+with mostly immutable data, such as log entries, sensor readings, and
+media storage. You don't change your sensor data after it arrives, so
+why do you care if each set of inputs appears in five different places
+in your database?
 
 Any information which must be updated frequently should be confined to
-small objects dedicated to the mutable information.
+small objects that are limited in scope.
 
 <!-- Would be nice to have an example here -->
 
