@@ -1,4 +1,3 @@
-
 # How not to write a Riak application
 
 Writing a Riak application is very much **not** like writing an
@@ -69,10 +68,9 @@ business needs well-served by blindly applying the most recent update?
 Some databases have no alternative but to handle it that way, but we think
 you deserve better.
 
-Riak 2.0, when installed on new clusters, will default to retaining
-conflicts and requiring the application to resolve them, but we're
-also providing replicated data types to automate conflict resolution
-on the servers.
+Typed buckets in Riak 2.0 default to retaining conflicts and requiring
+the application to resolve them, but we're also providing replicated
+data types to automate conflict resolution on the servers.
 
 If you want to minimize the need for conflict resolution, modeling
 with as much immutable data as possible is a big win.
