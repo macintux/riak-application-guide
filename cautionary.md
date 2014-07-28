@@ -1,10 +1,9 @@
 # Locks, a cautionary tale
 
-While assembling this guide, I tried to develop a data model that
-would allow for reliable locking without strong consistency. That
-attempt failed, but rather than throw the idea away entirely, I
-decided to include it here to illustrate the complexities of coping
-with eventual consistency.
+I recently tried to develop a data model that would allow for reliable
+locking without strong consistency. That attempt failed, but rather
+than throw the idea away entirely, I decided to include it here to
+illustrate the complexities of coping with eventual consistency.
 
 Basic premise: multiple workers may be assigned data sets to process,
 but each data set should be assigned to no more than one worker.
@@ -139,8 +138,8 @@ perfect sync.
 
     And, to be clear, perfect synchronization of clocks across
     multiple systems is unattainable. Google is attempting to solve
-    this by purchasing lots of atomic and GPS clocks at great expense,
-    and even that only narrows the margin of error.
+    this by purchasing large quantities of atomic and GPS clocks at
+    great expense, but that only narrows the margin of error.
 
 
 The same failure could occur if, instead of using timestamps for
