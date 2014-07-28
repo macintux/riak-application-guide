@@ -43,7 +43,7 @@ behavior.
 ### Configure at the bucket
 
 `allow_mult`
-:    Specify whether this bucket retains conflicts for the application to resolve (`true`) or pick a winner using vector clocks and server timestamp even if the causality history does not indicate that it is safe to do so (`false`). See [Conflict resolution] for more. Default: **`false`** prior to Riak 2.0, **`true`** after
+:    Specify whether this bucket retains conflicts for the application to resolve (`true`) or pick a winner using vector clocks and server timestamp even if the causality history does not indicate that it is safe to do so (`false`). See [Conflict resolution] for more. Default: **`false`** for untyped buckets (including all buckets prior to Riak 2.0), **`true`** otherwise
 
     You **should** give this value careful thought. You **must** know what it will be in your environment to do proper key/value data modeling.
 
