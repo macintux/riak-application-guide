@@ -66,13 +66,16 @@ approaches.
 
 (@namespace) Know thy namespaces.
 
-    **Bucket types** (introduced in Riak 2.0) offer a way to secure
-    and configure buckets. Buckets offer namespaces and configurable
-    request parameters for keys. Both are good ways to segregate keys
-    for data modeling.
+    Riak has several levels of namespaces when storing data.
 
-    However, keys themselves define their own namespaces. If you want
-    a hierarchy for your keys that looks like `sales/customer/month`,
+    Historically, buckets have been what most thought of as Riak's
+    virtual namespaces.
+
+    The newest level: **bucket types**, introduced in Riak 2.0, which
+    group buckets for configuration and security purposes.
+
+    Less obviously, keys are their own namespaces. If you want a
+    hierarchy for your keys that looks like `sales/customer/month`,
     you don't need nested buckets: you just need to name your keys
     appropriately, as discussed in (@keys). `sales` can be your
     bucket, while each key is prepended with customer name and month.
@@ -81,8 +84,9 @@ approaches.
 
     The other name for this rule? **Know your queries.**
 
-    Dynamic queries in Riak are expensive. Writing is cheap. Disk space is
-    cheap.
+    Writing data is cheap. Disk space is cheap.
+
+    Dynamic queries in Riak are very, very expensive.
 
     As your data flows into the system, generate the views you're going to
     want later. That magazine sales example from (@keys)? The December
@@ -92,25 +96,26 @@ approaches.
     application can assemble the full month's statistics for later
     retrieval.
 
-    Yes, getting accurate business requirements is non-trivial, but many
-    Riak applications are version 2 or 3 of a system, written once the
-    business discovered that the scalability story for MySQL, or Postgres,
-    or MongoDB, simply wasn't up to the job of handling their growth.
+    Yes, getting accurate business requirements is non-trivial, but
+    many Riak applications are version 2 or 3 of a system, written
+    once the business discovered that the scalability of MySQL,
+    Postgres, or MongoDB simply wasn't up to the job of handling their
+    growth.
 
 (@small) Take small bites.
 
     Remember your parents' advice over dinner? They were right.
 
-    When creating objects *that will be updated later*, constrain
-    their scope and keep the number of contained elements low to
-    reduce the odds of multiple clients attempting to update the data
-    concurrently.
+    When creating objects that will be updated, constrain their scope
+    and keep the number of contained elements low to reduce the odds
+    of multiple clients attempting to update the data concurrently.
 
 (@indexes) Create your own indexes.
 
-    Riak offers metadata-driven indexes for values, but these face
-    scaling challenges: in order to identify all objects for a given
-    index value, roughly a third of the cluster must be involved.
+    Riak offers metadata-driven indexes (2i) and full-text indexes
+    (Riak Search) for values, but these face scaling challenges: in
+    order to identify all objects for a given index value, roughly a
+    third of the cluster must be involved.
 
     For many use cases, creating your own indexes is straightforward
     and much faster/more scalable, since you'll be managing and
@@ -142,13 +147,14 @@ approaches.
     approach to mix and match databases for different needs. Riak is
     very fast and scalable for retrieving keys, but it's decidedly
     suboptimal at ad hoc queries. If you can't model your way out of
-    that problem, don't be afraid to store your keys with searchable
+    that problem, don't be afraid to store keys alongside searchable
     metadata in a relational or other database that makes querying
-    simpler.
+    simpler, and once you have the keys you need, grab the values
+    from Riak
 
     Just make sure that you consider failure scenarios when doing so;
-    it would be unfortunate to make Riak's effective availability a
-    slave to another database's weakness.
+    it would be unfortunate to compromise Riak's availability by
+    rendering it useless when your other database is offline.
 
 ## Further reading
 
