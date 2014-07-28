@@ -91,9 +91,8 @@ continue to serve requests in the prence of network partitions and
 server failures will be compromised.
 
 For example, if a majority of the primary servers for the data are
-unavailable, Riak will refuse to answer read requests, because the
-surviving servers have no way of knowing whether the data they contain
-is accurate.
+unavailable, Riak will refuse to answer read requests if the surviving
+servers are not certain the data they contain is accurate.
 
 Thus, use this only when necessary, such as when the consequences of
 conflicting writes are painful to cope with. An example of the need
