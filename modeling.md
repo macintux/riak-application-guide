@@ -9,9 +9,8 @@ willing to sacrifice the scalability, performance, and availability of
 Riak...but why would you?
 
 If you thoroughly absorbed the earlier content, some of this may feel
-redundant, but not all of us are able to grasp the implications of the
-key/value model, and I suspect you'll find a few interesting ideas
-here.
+redundant, but implications of the key/value model are not always
+obvious.
 
 ## Terminology
 
