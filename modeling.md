@@ -64,7 +64,7 @@ approaches.
     the customer id as a key in a `contacts` bucket would presumably
     contain contact information).
 
-(@namespace) Know thy namespaces.
+(@namespace) Know your namespaces.
 
     Riak has several levels of namespaces when storing data.
 
@@ -80,9 +80,7 @@ approaches.
     appropriately, as discussed in (@keys). `sales` can be your
     bucket, while each key is prepended with customer name and month.
 
-(@views) Write your own views.
-
-    The other name for this rule? **Know your queries.**
+(@views) Know your queries.
 
     Writing data is cheap. Disk space is cheap.
 
