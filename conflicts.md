@@ -68,8 +68,9 @@ losing occasional (or not so occasional) updates.
 It has always been possible to define data types on the client side to
 merge conflicts automatically.
 
-With Riak 1.4, Basho started introducing distributed data types to
-allow the cluster to resolve conflicting writes automatically. The
+With Riak 1.4, Basho started introducing distributed data types
+(formally known as **CRDTs**, or conflict-free replicated data types)
+to allow the cluster to resolve conflicting writes automatically. The
 first such type was a simple counter; Riak 2.0 adds sets and maps.
 
 These types are still bound by the same basic constraints as the rest
@@ -105,9 +106,61 @@ name, it is important to coordinate such requests.
 
 It is possible to use conditional requests with Riak, but these are
 fragile due to the nature of its availability/eventual consistency
-model.
+model. The only way to achieve true "only accept this write if the
+value hasn't changed since I've seen it" semantics is via strong
+consistency.
 
-**Need content here.**
+### Raw HTTP
+
+#### GET
+
+When retrieving values from Riak via HTTP, a last-modified timestamp
+and an [ETag](https://en.wikipedia.org/wiki/HTTP_ETag) are
+included. These may be used for future `GET` requests; if the value
+has not changed, a `304 Not Modified` status will be returned.
+
+For example, let's assume you receive the following headers.
+
+    Last-Modified: Thu, 17 Jul 2014 21:01:16 GMT
+    ETag: "3VhRP0vnXbk5NjZllr0dDE"
+
+Note that the quotes are part of the ETag.
+
+If the ETag is used via the `If-None-Match` header in the next request:
+
+    $ curl -i --header 'If-None-Match: "3VhRP0vnXbk5NjZllr0dDE"' http://localhost:8098/buckets/training/keys/baz
+    HTTP/1.1 304 Not Modified
+    Vary: Accept-Encoding
+    Server: MochiWeb/1.1 WebMachine/1.10.5 (jokes are better explained)
+    ETag: "3VhRP0vnXbk5NjZllr0dDE"
+    Date: Mon, 28 Jul 2014 19:48:13 GMT
+
+Similarly, the last-modified timestamp may be used with `If-Modified-Since`:
+
+    $ curl -i --header 'If-Modified-Since: Thu, 17 Jul 2014 21:01:16 GMT' http://localhost:8098/buckets/training/keys/baz
+    HTTP/1.1 304 Not Modified
+    Vary: Accept-Encoding
+    Server: MochiWeb/1.1 WebMachine/1.10.5 (jokes are better explained)
+    ETag: "3VhRP0vnXbk5NjZllr0dDE"
+    Date: Mon, 28 Jul 2014 19:51:39 GMT
+
+#### PUT & DELETE
+
+When adding, updating, or removing content, the HTTP headers
+`If-None-Match`, `If-Match`, `If-Modified-Since`, and
+`If-Unmodified-Since` can be used to specify ETags and timestamps.
+
+If the specified condition cannot be met, a `412 Precondition Failed`
+status will be the result.
+
+### Client libraries via protocol buffers
+
+The protocol buffers interface that most recent Riak clients use
+supports vector clocks as a point of comparison for operations,
+effectively equivalent to `If-None-Match` and `If-Match` via the HTTP
+interface.
+
+See your library's documentation for details.
 
 ## Locks and constraints
 
@@ -116,17 +169,9 @@ possible to define ACID-like transactions in Riak at the application
 level.
 
 Two mechanisms which are **not** guaranteed to work without strong
-consistency are locks and constraints on values.
-
-For financial operations, it may be necessary (or at least desirable)
-to prevent a balance from dropping below a certain value (e.g.,
-zero). This cannot be done with eventual consistency, because even
-with transactions it is always possible for a balance to be decreased
-on both sides of a network partition.
-
-Even with `PW=2` and conditional requests weird things can
-happen. Remember that `PW` requests can error out even when data is
-written durably.
+consistency are locks and constraints on values, although researchers
+are investigating mechanisms for creating boundary conditions in
+eventually-consistent data stores using CRDTs.
 
 ## Conflicting resolution
 
